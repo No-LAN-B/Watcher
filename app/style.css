@@ -12,7 +12,7 @@ body {
 
 .chart-container {
     flex: 3; /* Takes up 3/4 of the width */
-    padding: 20px;
+    padding: 200px;
     background-color: #fff;
     /* Ensure chart div has a defined height */
     display: flex;
