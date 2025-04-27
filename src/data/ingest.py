@@ -12,7 +12,7 @@ import os
 def main():
     tickers = ["AAPL", "MSFT", "GOOG"]
     provider = YFinanceProvider()
-    raw_data = provider.fetch(tickers, "2015-01-01", "2025-04-15")
+    raw_data = provider.fetch(tickers, "2015-01-01", "2025-05-01")
 
     os.makedirs("data/raw", exist_ok=True)
     for ticker, df in raw_data.items():
