@@ -3,6 +3,7 @@
 import os
 import pandas as pd
 
+# Note: This project is partially a learning exercise so commenting why / how something works will be very common as I use those comments to learn and remember.
 
 def prepare_dataset(
     processed_folder: str = "data/processed",

@@ -1,7 +1,9 @@
+// Note: This project is partially a learning exercise so commenting why / how something works will be very common as I use those comments to learn and remember.
+
 // Wait for the HTML document to be fully loaded before running chart code
 document.addEventListener('DOMContentLoaded', (event) => {
     console.log("DOM fully loaded and parsed");
-
+     
     // --- Chart Setup ---
     const chartElement = document.getElementById('chart');
     console.log("Chart element:", chartElement); 

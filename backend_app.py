@@ -3,7 +3,8 @@ from flask_cors import CORS
 import pandas as pd
 import datetime # To get today's date
 
-# --- CORRECTED IMPORT ---
+# Note: This project is partially a learning exercise so commenting why / how something works will be very common as I use those comments to learn and remember. 
+
 # Import the specific provider class from your provider script
 try:
     # Adjust 'src.data.provider' if your path is different

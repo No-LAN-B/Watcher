@@ -1,5 +1,7 @@
 import os, sys
-# add the parent of this folder (i.e. …/src) to sys.path
+
+# Note: This project is partially a learning exercise so commenting why / how something works will be very common as I use those comments to learn and remember. 
+
 sys.path.append(
     os.path.abspath(
       os.path.join(os.path.dirname(__file__), "..")

@@ -1,8 +1,8 @@
-# src/features/graph_features.py
-
 import os
 import pandas as pd
 import networkx as nx
+
+# Note: This project is partially a learning exercise so commenting why / how something works will be very common as I use those comments to learn and remember. 
 
 def build_correlation_graph(returns_df: pd.DataFrame, threshold: float = 0.7) -> nx.Graph:
     """

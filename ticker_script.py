@@ -7,26 +7,31 @@ import sys
 # This script fetches stock data from a Flask API, engineers features using a function from engineer.py,
 # It will then send it to my training script for the ml model to train on the data
 
+# Note: This project is partially a learning exercise so commenting why / how something works will be very common as I use those comments to learn and remember. 
 
 
-# --- Configuration ---
+# Configuration
 # Assuming Flask app runs locally on port 5000 change if not the case
 FLASK_API_BASE_URL = "http://127.0.0.1:5000" 
-# Output directory for the final engineered CSVs
-OUTPUT_DIR = "data/complete" 
 
-# --- Attempt to import the feature engineering function ---
+# Output directory for the final engineered CSVs
+DEFAULT_OUTPUT_DIR = "data/complete"
+
+# Output directory when generating data specifically for training (without Close)
+TRAINING_OUTPUT_DIR = "data/training_data" 
+
+# Attempt to import the feature engineering function
 # Adjust the path if your structure is different (e.g., if ticker_script.py is not in the root)
 try:
-    # Assumes ticker_script.py is in the project root, and engineer.py is in src/features/
     from src.features.engineer import engineer_features_for_stock 
 except ImportError:
     print("Error: Could not import 'engineer_features_for_stock' from 'src.features.engineer'.")
-    print("Please ensure:")
-    print("1. 'engineer.py' exists in the 'src/features/' directory.")
-    print("2. Your 'src' and 'src/features' directories contain an empty '__init__.py' file.")
-    print("3. You are running this script from the project's root directory.")
-    sys.exit(1) # Exit if the crucial function can't be imported
+    # ... (rest of import error message if I need to extend it) ...
+    sys.exit(1) 
+except Exception as e:
+    print(f"An unexpected error occurred during import: {e}")
+    traceback.print_exc()
+    sys.exit(1)
 
 def fetch_stock_data_from_api(ticker: str) -> pd.DataFrame | None:
     """Fetches historical stock data from the Flask API."""
@@ -67,8 +72,7 @@ def fetch_stock_data_from_api(ticker: str) -> pd.DataFrame | None:
             if columns_to_rename:
                  print(f"Renaming columns: {list(columns_to_rename.keys())} -> {list(columns_to_rename.values())}")
                  df.rename(columns=columns_to_rename, inplace=True)
-            # --------------------------------------------
-
+            
             # Convert 'Date' column to datetime and set as index
             if 'Date' in df.columns:
                  # Ensure the 'Date' column is not already the index before setting it
@@ -124,20 +128,40 @@ def fetch_stock_data_from_api(ticker: str) -> pd.DataFrame | None:
 
 def main():
     """Main function to fetch, process, and save data for a ticker."""
-    # --- Argument Parsing (for CLI usage) ---
+    # Argument Parsing (for CLI usage) 
     parser = argparse.ArgumentParser(description="Fetch and engineer features for a specific stock ticker using the backend API.")
     parser.add_argument("ticker", type=str, help="The stock ticker symbol (e.g., AAPL)")
+    
+    # Add the optional --train flag for training models
+    parser.add_argument(
+        "--train", 
+        action="store_true", # Makes it a boolean flag, True if present, False otherwise
+        help="Generate data specifically for training (removes 'Close' column and saves to training folder)."
+    )
     args = parser.parse_args()
-    ticker = args.ticker.upper() # Standardize to uppercase
+    ticker = args.ticker.strip().upper()
+    is_training_mode = args.train # Check if the flag was used
 
-    # --- Fetch Data ---
+    # Determine Output Directory
+    if is_training_mode:
+        output_dir = TRAINING_OUTPUT_DIR
+        print(f"\n--- Running in TRAINING mode for {ticker} ---")
+        print(f"Output will be saved to: {output_dir}")
+        print("The 'Close' column will be REMOVED.")
+    else:
+        output_dir = DEFAULT_OUTPUT_DIR
+        print(f"\n--- Running in standard mode for {ticker} ---")
+        print(f"Output will be saved to: {output_dir}")
+        print("The 'Close' column will be KEPT.")
+
+    # Fetch Data
     df_fetched = fetch_stock_data_from_api(ticker)
 
     if df_fetched is None:
         print(f"Could not proceed for ticker {ticker}.")
         return # Exit if fetching failed
 
-    # --- Engineer Features ---
+    # Engineer Features
     # This assumes df_fetched contains the necessary OHLCV columns
     print(f"Engineering features for {ticker}...")
     try:
@@ -147,17 +171,31 @@ def main():
         print(f"Error during feature engineering for {ticker}: {e}")
         return
 
+    # --- Modify DataFrame based on Mode ---
+    if is_training_mode:
+        # Remove the 'Close' column if it exists
+        if 'Close' in df_engineered.columns:
+            df_engineered = df_engineered.drop(columns=['Close'])
+            print("Removed 'Close' column for training data.")
+        else:
+            print("Warning: 'Close' column not found, could not remove it.")
+            
     # --- Save the Result ---
-    os.makedirs(OUTPUT_DIR, exist_ok=True) # Create output dir if needed
-    output_filename = os.path.join(OUTPUT_DIR, f"{ticker}_complete_features.csv")
+    os.makedirs(output_dir, exist_ok=True) # Create output dir if needed
+    # Use a different filename suffix based on mode for clarity
+    file_suffix = "training_data" if is_training_mode else "complete"
+    output_filename = os.path.join(output_dir, f"{ticker}_{file_suffix}.csv")
     
     try:
         df_engineered.to_csv(output_filename)
-        print(f"Successfully saved engineered data for {ticker} to: {output_filename}")
+        print(f"\nSuccessfully saved data for {ticker} to: {output_filename}")
+        print("\nFinal DataFrame Info:")
+        df_engineered.info() # Show info of the saved DataFrame
     except Exception as e:
         print(f"Error saving file {output_filename}: {e}")
+        traceback.print_exc()
 
 if __name__ == "__main__":
-    # Make sure your Flask server (app.py) is running in a separate terminal
+    # Make sure Flask server (app.py) is running in a separate terminal
     # before executing this script.
     main()
