@@ -50,14 +50,48 @@ def fetch_stock_data_from_api(ticker: str) -> pd.DataFrame | None:
         # Convert JSON list of records to DataFrame
         if isinstance(data, list) and len(data) > 0:
             df = pd.DataFrame.from_records(data)
-            # Convert 'time' column to datetime and set as index
-            if 'time' in df.columns:
-                 df['Date'] = pd.to_datetime(df['time'])
-                 df.set_index('Date', inplace=True)
-                 df.drop(columns=['time'], inplace=True)
+            # --- FIX: Rename columns received from API ---
+            # Define the mapping from potential lowercase API keys to standard uppercase
+            rename_map = {
+                'time': 'Date',   # Expected by set_index
+                'open': 'Open',
+                'high': 'High',
+                'low': 'Low',
+                'close': 'Close',
+                'volume': 'Volume' # Add volume if your API returns it
+            }
+            
+            # Create a dictionary of columns that actually exist in the DataFrame and need renaming
+            columns_to_rename = {k: v for k, v in rename_map.items() if k in df.columns}
+            
+            if columns_to_rename:
+                 print(f"Renaming columns: {list(columns_to_rename.keys())} -> {list(columns_to_rename.values())}")
+                 df.rename(columns=columns_to_rename, inplace=True)
+            # --------------------------------------------
+
+            # Convert 'Date' column to datetime and set as index
+            if 'Date' in df.columns:
+                 # Ensure the 'Date' column is not already the index before setting it
+                 if df.index.name != 'Date':
+                     df['Date'] = pd.to_datetime(df['Date'])
+                     df.set_index('Date', inplace=True)
+                 else:
+                     # If 'Date' is already the index, ensure it's datetime
+                     df.index = pd.to_datetime(df.index)
+                     
                  df.sort_index(inplace=True) # Ensure chronological order
-                 print(f"Successfully fetched and parsed {len(df)} rows for {ticker}.")
-                 return df
+                 
+                 # Check if essential columns are present AFTER potential rename
+                 # These are needed by the engineer_features_for_stock function
+                 essential_cols = ['Open', 'High', 'Low', 'Close', 'Volume'] 
+                 if all(col in df.columns for col in essential_cols):
+                      print(f"Successfully fetched and prepared {len(df)} rows for {ticker}.")
+                      return df
+                 else:
+                      missing = [col for col in essential_cols if col not in df.columns]
+                      print(f"Error: DataFrame for {ticker} is missing essential columns after preparation: {missing}")
+                      print("Columns received and prepared:", df.columns.tolist())
+                      return None
             else:
                  print(f"Error: Response for {ticker} is missing the 'time' column.")
                  return None
@@ -98,7 +132,7 @@ def main():
 
     # --- Fetch Data ---
     df_fetched = fetch_stock_data_from_api(ticker)
-    
+
     if df_fetched is None:
         print(f"Could not proceed for ticker {ticker}.")
         return # Exit if fetching failed

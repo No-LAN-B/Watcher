@@ -53,7 +53,7 @@ def get_stockdata_api():
              return jsonify({"error": f"No data found for symbol: {symbol}"}), 404
 
         # --- Format data for Lightweight Charts (same as before) ---
-        required_cols = ['Open', 'High', 'Low', 'Close'] 
+        required_cols = ['Open', 'High', 'Low', 'Close', 'Volume']
         
         if isinstance(df.index, pd.DatetimeIndex):
              df = df.reset_index() 
