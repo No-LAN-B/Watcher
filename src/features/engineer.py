@@ -29,8 +29,11 @@ def compute_technical_features(df: pd.DataFrame, window: int = 10) -> pd.DataFra
          # This might result in NaNs anyway, which is fine for now.
          features[f'vol_{window}'] = pd.Series(index=df.index, dtype=float)
 
+    #4. Target Price: Next day's Close price (shifted)
+    features['Target_Price'] = df['Close'].shift(-1) # Shifted to align with current row ie. next days close is the target_price current day value IDEALLY
+    # This is the target variable for supervised learning, linear Regression is the plan.
 
-    # 4. Lagged Close Price (Yesterday's Close) - Often useful!
+    # 5. Lagged Close Price (Yesterday's Close) - Often useful!
     features['Close_Lag_1'] = df['Close'].shift(1)
     
     # --- ADD MORE FEATURES HERE ---
@@ -47,6 +50,9 @@ def compute_technical_features(df: pd.DataFrame, window: int = 10) -> pd.DataFra
     #     features['Signal_line'] = signal_line
     # -----------------------------
 
+    #6. Drop NaNs from the features DataFrame
+    features.dropna(inplace=True) # Drop NaNs from the original DataFrame to avoid misalignment
+    # Note: This will drop rows with NaNs in any column, including 'Close'.
     return features
 
 # --- MODIFIED Reusable Function ---
@@ -88,6 +94,7 @@ def engineer_features_for_stock(input_df: pd.DataFrame, window: int = 10) -> pd.
 def main_save_combined_features():
     raw_folder = "data/raw"
     processed_folder = "data/processed_combined" # Save to a different folder
+    print(f"Processing raw data from {raw_folder} to {processed_folder}")
     os.makedirs(processed_folder, exist_ok=True)
 
     for fname in os.listdir(raw_folder):
@@ -114,8 +121,7 @@ def main_save_combined_features():
         except Exception as e:
             print(f"Error processing {ticker}: {e}")
 
-
 # You wouldn't typically run the main function directly from here when training.
 # The train_generic_model.py script will import engineer_features_for_stock.
-# if __name__ == "__main__":
-#    main_save_combined_features()
+if __name__ == "__main__":
+    main_save_combined_features()
