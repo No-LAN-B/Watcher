@@ -1,0 +1,23 @@
+Starting a lil devlog here to keep track of my progress in the project and to share some insights into the development process.
+I will be updating this file regularly with new features, bugs, and other things I encounter along the way.
+
+April 27th, 2025
+- git issue regarding a dereferencing to my local head branch. I had to create a new master branch publish to the remote repo
+- them merge that master branch into my remote main branch as that was the default branch for the repo and ideally id like to keep a linear history.
+- I had to delete my local main branch and create a new one from the remote main branch. ie. just a simple checkout to main and sync with the remote.
+
+# 4:52pm 
+- Current Work & Plans:
+    - I have begun training and have been testing a variety of methods for the model.
+    - I have been using a variety of datasets to train the model and have been testing the model on a varient of metrics
+    - I have found that the model is not performing well with linear regression & random forest regression.
+    - This makes sense as the model is not able to capture the non-linear relationships in the data like in the stock market.
+    - While there is a lot of overlap in the data, What im looking for is a general UP / DOWN and the degree of that change.
+    - Afterwards I will be looking to integrate a sentiment analysis model to help with the prediction of the stock market.
+    - This will be done through an LLM likely a fine-tuned version of on OpenAI / Gemini / Claude model likely OpenAI as the developer API is what I am most familiar with.
+    - I will then create a model that fuses these prediction lines with a heavier weight on sentiment with either a supervised learning algorithm as the data will be fairly simplistic once I quantify the sentiment analysis
+    - Or I will attempt to use a neural network and take multiple inputs such as sentiment analysis, live stock data (stuff that I'll probably have to pay for), and use the neural network as a stream for other ml models 
+    - My current solution is to try out gradient boosting as it ties up a few different models in a nice package that I hope will be able to capture that UP / DOWN relationship.
+    - I'll be using XGBoost as it is a very popular and powerful library for gradient boosting.
+    - Then to fine turn the model I'll start feuture engineering a little more (adding RSI, MACD, etc) and then use a grid search to find the best hyperparameters for the model.
+    - I'm curious if the RSI MACD line crossovers will be able to help the model learn the UP / DOWN relationship better. and develop an understanding of "trends" in the data.
