@@ -1,0 +1,69 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh; /* Full viewport height */
+}
+
+.chart-container {
+    flex: 3; /* Takes up 3/4 of the width */
+    padding: 200px;
+    background-color: #fff;
+    /* Ensure chart div has a defined height */
+    display: flex;
+    flex-direction: column; 
+}
+
+#chart {
+    width: 100%;
+    flex-grow: 1; /* Allows chart div to fill remaining vertical space */
+    border: 1px solid #ccc; /* Visual border for the chart area */
+    min-height: 400px; /* Minimum height */
+}
+
+
+.sidebar {
+    flex: 1; /* Takes up 1/4 of the width */
+    padding: 20px;
+    background-color: #e9e9e9;
+    border-left: 1px solid #ccc;
+    overflow-y: auto; /* Add scroll if content overflows */
+}
+
+.sidebar h2, .chart-container h2 {
+    margin-top: 0;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+#watchlist li {
+    list-style: none;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#watchlist li:last-child {
+    border-bottom: none;
+}
+
+.controls {
+    margin-top: 20px;
+}
+
+button {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+select {
+     padding: 5px;
+     margin-left: 5px;
+}

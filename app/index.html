@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Visualizer Concept</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        
+        <div class="chart-container">
+            <h2>Stock Chart Area</h2> 
+            <div id="chart"></div> 
+        </div>
+
+        <div class="sidebar">
+            <h2>Watchlist / Controls</h2>
+            <ul id="watchlist">
+                <li>AAPL <button onclick="loadSymbol('AAPL')">Load</button></li>
+                <li>GOOGL <button onclick="loadSymbol('GOOGL')">Load</button></li>
+                <li>MSFT <button onclick="loadSymbol('MSFT')">Load</button></li>
+                </ul>
+            <div class="controls">
+                <h4>Settings</h4>
+                <label for="timeframe">Timeframe:</label>
+                <select id="timeframe">
+                    <option value="1D">1 Day</option>
+                    <option value="1W">1 Week</option>
+                    <option value="1M">1 Month</option>
+                </select>
+                </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
