@@ -21,3 +21,12 @@ April 27th, 2025
     - I'll be using XGBoost as it is a very popular and powerful library for gradient boosting.
     - Then to fine turn the model I'll start feuture engineering a little more (adding RSI, MACD, etc) and then use a grid search to find the best hyperparameters for the model.
     - I'm curious if the RSI MACD line crossovers will be able to help the model learn the UP / DOWN relationship better. and develop an understanding of "trends" in the data.
+
+#6:16pm
+- Current Work & Plans:
+    - I have been working on the model for a few hours now and XGBoost actually performed worse than other regression models.
+    - I have been trying to figure out why this is the case and I just don't think that the model is able to understand the data well enough. 
+    - As much as data like macd or rsi are great indicators applying it to a regression model is not the best way to go about it as the model is not able to learn the relationships between the data points and develop strategies obviously.
+    - Because of this were going to take a different approach. Instead of switching models ill try using XGBoost as a classifier and see if that works better. ie determing if the stock will go up or down.
+    - I will then use the classifier to determine the direction of the stock and then use a regression model to determine the degree of that change if possible.
+    - Once I can reliably predict the direction of the stock I will then be able to use that information and determine how I will proceed around that.
