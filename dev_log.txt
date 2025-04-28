@@ -30,3 +30,15 @@ April 27th, 2025
     - Because of this were going to take a different approach. Instead of switching models ill try using XGBoost as a classifier and see if that works better. ie determing if the stock will go up or down.
     - I will then use the classifier to determine the direction of the stock and then use a regression model to determine the degree of that change if possible.
     - Once I can reliably predict the direction of the stock I will then be able to use that information and determine how I will proceed around that.
+
+#9:01pm
+- Current Work & Plans:
+    - I now have a working classifier trainer for models. I'll be using this to try and determine my best choice of model for the classification task and fine tuning the model.
+    - I have gotten to about 55-60% accuracy (determining Up or Down) on the S&P 500 data set which is not great but its a start. 
+    - I want to try fooling around with the training split something like 95-98% training and 2-5% testing. As I think more current data along with a smaller period of fluctuation will help me tune in for day to day trading which is what I am looking for.
+    - I have also added a trading strategy seperate from the model more similar to a trading bot that is more of a proof of concept than anything else.
+    - By creating multiple strategies the idea is to allow an "overseer" model to determine which strategy is the best for the current market conditions and then use that strategy to trade.
+    - And / Or use that accuracy data along with overlaying the strategies to find a "best" strategy for the current market conditions. Like a "best of" strategy or a nested ML model.
+    - Currently the MACD and RSI strategy is performing the best with a 60% accuracy on the S&P 500 data set. and a profit of ~$1000 trading 1 share at a time over a year, and over other stocks like AAPL and TSLA. the model is not performing AS well but
+    - is still performing well enough to be profitable.
+    - Calling it a night for now. I will be back tomorrow to continue working on the models and strategies and continuing research!
