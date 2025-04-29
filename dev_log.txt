@@ -61,3 +61,14 @@ April 28th, 2025
     - I will be looking into this more and try to instead of increasing features to decrease features and see if patterns emerge from that. 
     - After of which I'll try to reoptimize. 
     
+April 29th, 2025
+#11:50am
+- Current Work & Plans:
+    - We are up and awake bright-eyed and bushy-tailed I have a mocha on my desk and a breakfast wrap in my hand and today we are going to kill this thing... I hope :D.
+    - Okay I may be a little over my head I've decided in order to get the results I want I will need to implement an LSTM model. I have very very bareboned knowledge of RNN's so this will be a learning experience for me.
+    - I'll be taking a bit of a crash course and hit the books this is going to be a long day.
+    - Not much work may be done today I'll probably play around with code and try little isolated projects like replicating tensorflow examples from hand written numpy code.
+    - This project has jumped from basic machine learning regression to a full blown deep learning project and I am all for it. However I'll have to step back and read, read, read.
+
+
+#
