@@ -42,3 +42,22 @@ April 27th, 2025
     - Currently the MACD and RSI strategy is performing the best with a 60% accuracy on the S&P 500 data set. and a profit of ~$1000 trading 1 share at a time over a year, and over other stocks like AAPL and TSLA. the model is not performing AS well but
     - is still performing well enough to be profitable.
     - Calling it a night for now. I will be back tomorrow to continue working on the models and strategies and continuing research!
+
+April 28th, 2025
+#4:02pm
+- Current Work & Plans:
+    - I have been working on the model for a few hours now and I have been trying to figure out how to improve the accuracy of the model.
+    - Ive decided to stick to a classification model regression just isnt in tune with multivariable stock data like this. At least for an intraday model.
+    - I'm currently looking in to LSTM models as they are able to capture the relationships between the data points and develop strategies.
+    - Today will be more of a research day as I want to gather as much info regarding technical approximations of data that other people have accomplished and see if I can find a way to implement that into my model and trading in general.
+    - I have also been looking into the possibility of using a reinforcement learning model to determine the best strategy for the current market conditions and then use that strategy to trade.
+    - Admittedly I got a little sidetracked with n8n as I was trying to see if agentic ai could be used to converse with eachother and interlink with eachother to create a more complex model.
+    - This took a little longer than expected and I will be sticking to my initial approach not because it wont or didnt work but because this project is specifically focused on machine learning and I want to keep it as linear as I can.
+    - Until I have a working model with my current approach or a strong understanding of the ML models ill be using and why or why not they are working.
+    - This devlog is infact helping alot as it helps to get my thoughts organized and helps me to see the progress that I am making even if it is back forth back forth and not linear at all.
+    - Main conclusion for today's testing and work is I'll have to implement a multiclass model that utilizes a best fit of technical models. 
+    - An interesting issue i ran into on my test branch that i will not be committing as I have since wiped it is that different models had the exact same up down predictions despite entirely different approaches to the data.
+    - Current theory is that there is a "dominant" feature in the data that is causing the model to learn the same thing over and over again.
+    - I will be looking into this more and try to instead of increasing features to decrease features and see if patterns emerge from that. 
+    - After of which I'll try to reoptimize. 
+    
