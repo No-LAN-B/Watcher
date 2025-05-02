@@ -16,6 +16,8 @@ MACD_FAST = 12
 MACD_SLOW = 26
 MACD_SIGNAL = 9
 
+
+
 def compute_technical_features(df: pd.DataFrame, 
                                sma_window_short: int = SMA_WINDOW_SHORT, 
                                sma_window_long: int = SMA_WINDOW_LONG, # <<< Add parameter
