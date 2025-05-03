@@ -1,7 +1,7 @@
 Starting a lil devlog here to keep track of my progress in the project and to share some insights into the development process.
 I will be updating this file regularly with new features, bugs, and other things I encounter along the way.
 
-April 27th, 2025
+April 29th, 2025
 - git issue regarding a dereferencing to my local head branch. I had to create a new master branch publish to the remote repo
 - them merge that master branch into my remote main branch as that was the default branch for the repo and ideally id like to keep a linear history.
 - I had to delete my local main branch and create a new one from the remote main branch. ie. just a simple checkout to main and sync with the remote.
@@ -43,7 +43,7 @@ April 27th, 2025
     - is still performing well enough to be profitable.
     - Calling it a night for now. I will be back tomorrow to continue working on the models and strategies and continuing research!
 
-April 28th, 2025
+April 30th, 2025
 #4:02pm
 - Current Work & Plans:
     - I have been working on the model for a few hours now and I have been trying to figure out how to improve the accuracy of the model.
@@ -61,7 +61,7 @@ April 28th, 2025
     - I will be looking into this more and try to instead of increasing features to decrease features and see if patterns emerge from that. 
     - After of which I'll try to reoptimize. 
     
-April 29th, 2025
+April 31st, 2025
 #11:50am
 - Current Work & Plans:
     - We are up and awake bright-eyed and bushy-tailed I have a mocha on my desk and a breakfast wrap in my hand and today we are going to kill this thing... I hope :D.
@@ -71,7 +71,7 @@ April 29th, 2025
     - This project has jumped from basic machine learning regression to a full blown deep learning project and I am all for it. However I'll have to step back and read, read, read.
 
 
-April 30th, 2025
+May 1st, 2025
 #9:00pm
 - Current Work & Plans:
     - Was busy all day today but I squeezed in a couple hours of research and I'm starting to get a solid understanding of LSTM models and how they work.
@@ -83,4 +83,7 @@ April 30th, 2025
     - Tomorrow I'll be prototyping the LSTM model and seeing how it performs on the data.
     - I will be using the S&P 500 data set as a test case and then I will be using the NVDA and TSLA data sets to see how well the model generalizes to other stocks that have had more recent "explosive" performance.
 
-
+May 2nd, 2025
+#5:00pm
+- Current Work & Plans:
+    - Taking a break day today. I am working on a professional certification and I will be focusign on that for today.
