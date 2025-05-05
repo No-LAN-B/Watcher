@@ -61,7 +61,7 @@ April 30th, 2025
     - I will be looking into this more and try to instead of increasing features to decrease features and see if patterns emerge from that. 
     - After of which I'll try to reoptimize. 
     
-April 31st, 2025
+April 30th, 2025
 #11:50am
 - Current Work & Plans:
     - We are up and awake bright-eyed and bushy-tailed I have a mocha on my desk and a breakfast wrap in my hand and today we are going to kill this thing... I hope :D.
