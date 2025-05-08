@@ -42,7 +42,7 @@ def load_data_for_ticker(ticker: str) -> pd.DataFrame | None:
         df = pd.read_csv(filepath, index_col='Date', parse_dates=True)
         df.sort_index(inplace=True)
         print(f"Loaded {len(df)} rows for {ticker} from '{filepath}'.")
-        return df
+        return df  
     except Exception as e:
         print(f"Error loading data for {ticker} from '{filepath}': {e}")
         traceback.print_exc()

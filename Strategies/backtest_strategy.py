@@ -292,3 +292,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# working strategy test with stop-loss and commission
